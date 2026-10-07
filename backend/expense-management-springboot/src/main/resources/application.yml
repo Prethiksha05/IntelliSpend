@@ -1,0 +1,127 @@
+# ======================================================================
+# IntelliSpend — Application Configuration
+# ======================================================================
+
+spring:
+  application:
+    name: intellispend-backend
+
+  # ============================
+  # Database Configuration
+  # ============================
+  datasource:
+    url: jdbc:mysql://${DB_HOST:localhost}:${DB_PORT:3306}/${DB_NAME:intellispend_db}?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true&createDatabaseIfNotExist=true
+    username: ${DB_USERNAME:root}
+    password: ${DB_PASSWORD:password}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    hikari:
+      pool-name: IntelliSpendHikariPool
+      maximum-pool-size: 10
+      minimum-idle: 5
+      connection-timeout: 30000
+      idle-timeout: 600000
+      max-lifetime: 1800000
+
+  # ============================
+  # JPA / Hibernate
+  # ============================
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    show-sql: false
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL8Dialect
+        format_sql: true
+        use_sql_comments: true
+        jdbc:
+          batch_size: 20
+        order_inserts: true
+        order_updates: true
+    open-in-view: false
+
+  # ============================
+  # File Upload
+  # ============================
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 10MB
+
+# ============================
+# Server Configuration
+# ============================
+server:
+  port: ${SERVER_PORT:8080}
+  error:
+    include-message: never
+    include-stacktrace: never
+    include-binding-errors: never
+
+# ============================
+# JWT Configuration
+# ============================
+app:
+  jwt:
+    secret: ${JWT_SECRET:ThisIsAVeryLongSecretKeyForJWTTokenGenerationThatShouldBeAtLeast256BitsLongForHS256Algorithm}
+    access-token-expiration-ms: ${JWT_ACCESS_EXPIRY_MS:900000}      # 15 minutes
+    refresh-token-expiration-ms: ${JWT_REFRESH_EXPIRY_MS:604800000} # 7 days
+
+  # ============================
+  # ML Service Configuration
+  # ============================
+  ml-service:
+    url: ${ML_SERVICE_URL:http://localhost:8000}
+    timeout-ms: ${ML_SERVICE_TIMEOUT_MS:10000}
+
+  # ============================
+  # CORS Configuration
+  # ============================
+  cors:
+    allowed-origins: ${CORS_ALLOWED_ORIGINS:http://localhost:4200}
+    allowed-methods: GET,POST,PUT,DELETE,OPTIONS
+    allowed-headers: "*"
+    allow-credentials: true
+    max-age: 3600
+
+# ============================
+# Actuator
+# ============================
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics
+  endpoint:
+    health:
+      show-details: when-authorized
+  info:
+    env:
+      enabled: true
+
+info:
+  app:
+    name: IntelliSpend
+    version: 1.0.0
+    description: Intelligent Expense Management and Anomaly Detection Platform
+
+# ============================
+# SpringDoc / Swagger
+# ============================
+springdoc:
+  api-docs:
+    path: /api-docs
+  swagger-ui:
+    path: /swagger-ui.html
+    operationsSorter: method
+
+# ============================
+# Logging
+# ============================
+logging:
+  level:
+    com.intellispend: INFO
+    org.springframework.security: WARN
+    org.hibernate.SQL: WARN
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"

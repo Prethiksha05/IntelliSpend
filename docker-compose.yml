@@ -1,0 +1,132 @@
+# ======================================================
+# IntelliSpend — Docker Compose
+# Orchestrates: MySQL, Spring Boot Backend, ML Service, Angular Frontend
+# ======================================================
+
+version: "3.9"
+
+services:
+
+  # ==========================================
+  # MySQL Database
+  # ==========================================
+  mysql:
+    image: mysql:8.0
+    container_name: intellispend-mysql
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD:-rootpassword}
+      MYSQL_DATABASE: ${DB_NAME:-intellispend_db}
+      MYSQL_USER: ${DB_USERNAME:-intellispend_user}
+      MYSQL_PASSWORD: ${DB_PASSWORD:-intellispend_pass}
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./database/scripts/schema.sql:/docker-entrypoint-initdb.d/01-schema.sql:ro
+      - ./database/scripts/seed.sql:/docker-entrypoint-initdb.d/02-seed.sql:ro
+    networks:
+      - intellispend-network
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-p${DB_ROOT_PASSWORD:-rootpassword}"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 30s
+
+  # ==========================================
+  # Python ML Service
+  # ==========================================
+  ml-service:
+    build:
+      context: ./ml-service/anomaly-detection
+      dockerfile: Dockerfile
+    container_name: intellispend-ml
+    restart: unless-stopped
+    environment:
+      CORS_ALLOWED_ORIGINS: ${CORS_ALLOWED_ORIGINS:-http://localhost:8080,http://localhost:4200}
+      MODELS_DIR: /app/app/models/saved
+    ports:
+      - "8000:8000"
+    volumes:
+      - ml_models:/app/app/models/saved
+    networks:
+      - intellispend-network
+    healthcheck:
+      test: ["CMD", "python", "-c", "import httpx; httpx.get('http://localhost:8000/health').raise_for_status()"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 30s
+
+  # ==========================================
+  # Spring Boot Backend
+  # ==========================================
+  backend:
+    build:
+      context: ./backend/expense-management-springboot
+      dockerfile: Dockerfile
+    container_name: intellispend-backend
+    restart: unless-stopped
+    environment:
+      DB_HOST: mysql
+      DB_PORT: 3306
+      DB_NAME: ${DB_NAME:-intellispend_db}
+      DB_USERNAME: ${DB_USERNAME:-intellispend_user}
+      DB_PASSWORD: ${DB_PASSWORD:-intellispend_pass}
+      JWT_SECRET: ${JWT_SECRET}
+      ML_SERVICE_URL: http://ml-service:8000
+      CORS_ALLOWED_ORIGINS: ${CORS_ALLOWED_ORIGINS:-http://localhost:4200}
+      SERVER_PORT: 8080
+    ports:
+      - "8080:8080"
+    depends_on:
+      mysql:
+        condition: service_healthy
+      ml-service:
+        condition: service_healthy
+    networks:
+      - intellispend-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/actuator/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 60s
+    volumes:
+      - uploads_data:/app/uploads
+
+  # ==========================================
+  # Angular Frontend
+  # ==========================================
+  frontend:
+    build:
+      context: ./frontend/expense-management-angular
+      dockerfile: Dockerfile
+    container_name: intellispend-frontend
+    restart: unless-stopped
+    ports:
+      - "80:80"
+    depends_on:
+      backend:
+        condition: service_healthy
+    networks:
+      - intellispend-network
+
+# ==========================================
+# Volumes
+# ==========================================
+volumes:
+  mysql_data:
+    driver: local
+  ml_models:
+    driver: local
+  uploads_data:
+    driver: local
+
+# ==========================================
+# Networks
+# ==========================================
+networks:
+  intellispend-network:
+    driver: bridge
