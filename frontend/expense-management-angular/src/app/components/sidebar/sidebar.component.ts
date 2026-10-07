@@ -11,7 +11,7 @@ import { AuthService } from '../../services/auth.service';
     <aside class="sidebar">
       <div class="brand">
         <div class="logo-box">
-          <i class="fa-solid fa-brain-circuit text-gradient"></i>
+          <i class="fa-solid fa-brain-circuit"></i>
         </div>
         <div class="brand-text">
           <span class="brand-title">Intelli<span class="brand-accent">Spend</span></span>
@@ -58,47 +58,48 @@ import { AuthService } from '../../services/auth.service';
     .sidebar {
       width: 260px;
       height: 100vh;
-      background: #090d16;
-      border-right: 1px solid rgba(255, 255, 255, 0.08);
+      background: #ffffff;
+      border-right: 1px solid #e2e8f0;
       display: flex;
       flex-direction: column;
       padding: 24px 16px;
       position: sticky;
       top: 0;
+      box-shadow: 2px 0 10px rgba(15, 23, 42, 0.02);
     }
     .brand {
       display: flex;
       align-items: center;
       gap: 12px;
-      padding: 0 8px 24px 8px;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      padding: 0 8px 20px 8px;
+      border-bottom: 1px solid #f1f5f9;
       margin-bottom: 24px;
     }
     .logo-box {
       width: 42px;
       height: 42px;
       border-radius: 12px;
-      background: linear-gradient(135deg, rgba(99, 102, 241, 0.2) 0%, rgba(168, 85, 247, 0.2) 100%);
-      border: 1px solid rgba(99, 102, 241, 0.4);
+      background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
       display: flex;
       align-items: center;
       justify-content: center;
       font-size: 1.3rem;
-      color: #818cf8;
+      color: #ffffff;
+      box-shadow: 0 4px 10px rgba(79, 70, 229, 0.25);
     }
     .brand-title {
-      font-size: 1.15rem;
+      font-size: 1.2rem;
       font-weight: 800;
       letter-spacing: -0.02em;
-      color: #ffffff;
+      color: #0f172a;
     }
     .brand-accent {
-      color: #818cf8;
+      color: #4f46e5;
     }
     .brand-badge {
       font-size: 0.65rem;
       font-weight: 700;
-      color: #38bdf8;
+      color: #0284c7;
       letter-spacing: 0.08em;
       display: block;
       margin-top: 2px;
@@ -106,7 +107,7 @@ import { AuthService } from '../../services/auth.service';
     .nav-section {
       font-size: 0.7rem;
       font-weight: 700;
-      color: #64748b;
+      color: #94a3b8;
       letter-spacing: 0.08em;
       padding: 0 12px 10px 12px;
     }
@@ -121,7 +122,7 @@ import { AuthService } from '../../services/auth.service';
       align-items: center;
       gap: 12px;
       padding: 11px 14px;
-      color: #94a3b8;
+      color: #475569;
       text-decoration: none;
       font-weight: 600;
       font-size: 0.9rem;
@@ -130,13 +131,14 @@ import { AuthService } from '../../services/auth.service';
       position: relative;
     }
     .nav-item:hover {
-      color: #ffffff;
-      background: rgba(255, 255, 255, 0.04);
+      color: #0f172a;
+      background: #f8fafc;
     }
     .nav-item.active {
-      color: #ffffff;
-      background: linear-gradient(90deg, rgba(99, 102, 241, 0.2) 0%, rgba(99, 102, 241, 0.05) 100%);
-      border-left: 3px solid #6366f1;
+      color: #4f46e5;
+      background: #eff6ff;
+      border-left: 3px solid #4f46e5;
+      font-weight: 700;
     }
     .nav-item i {
       font-size: 1.05rem;
@@ -144,21 +146,16 @@ import { AuthService } from '../../services/auth.service';
       text-align: center;
     }
     .pulse-dot {
-      width: 7px;
-      height: 7px;
+      width: 8px;
+      height: 8px;
       border-radius: 50%;
-      background: #f43f5e;
+      background: #e11d48;
       margin-left: auto;
-      box-shadow: 0 0 8px #f43f5e;
-      animation: pulse 1.5s infinite;
-    }
-    @keyframes pulse {
-      0%, 100% { transform: scale(1); opacity: 1; }
-      50% { transform: scale(1.4); opacity: 0.6; }
+      box-shadow: 0 0 6px rgba(225, 29, 72, 0.5);
     }
     .sidebar-footer {
       padding-top: 16px;
-      border-top: 1px solid rgba(255, 255, 255, 0.06);
+      border-top: 1px solid #f1f5f9;
     }
     .user-profile {
       display: flex;
@@ -166,13 +163,14 @@ import { AuthService } from '../../services/auth.service';
       gap: 10px;
       padding: 8px;
       border-radius: 12px;
-      background: rgba(255, 255, 255, 0.02);
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
     }
     .avatar {
       width: 36px;
       height: 36px;
       border-radius: 10px;
-      background: linear-gradient(135deg, #6366f1, #a855f7);
+      background: linear-gradient(135deg, #4f46e5, #7c3aed);
       color: white;
       font-weight: 700;
       font-size: 0.85rem;
@@ -189,26 +187,26 @@ import { AuthService } from '../../services/auth.service';
     .user-name {
       font-size: 0.85rem;
       font-weight: 700;
-      color: #ffffff;
+      color: #0f172a;
       white-space: nowrap;
       text-overflow: ellipsis;
       overflow: hidden;
     }
     .user-role {
       font-size: 0.7rem;
-      color: #94a3b8;
+      color: #64748b;
     }
     .btn-logout {
       background: transparent;
       border: none;
-      color: #64748b;
+      color: #94a3b8;
       cursor: pointer;
       font-size: 0.95rem;
       padding: 6px;
       transition: color 0.2s;
     }
     .btn-logout:hover {
-      color: #f43f5e;
+      color: #e11d48;
     }
   `]
 })

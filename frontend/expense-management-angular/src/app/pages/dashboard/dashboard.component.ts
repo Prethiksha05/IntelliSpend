@@ -12,17 +12,26 @@ import { DashboardSummary, Expense, Category } from '../../models/models';
   template: `
     <div class="dashboard-page">
       <!-- Header -->
-      <header class="page-header">
-        <div>
-          <h1 class="page-title">Executive Financial Overview</h1>
-          <p class="page-subtitle">Real-time expenditure intelligence & ML-powered behavioral anomaly detection</p>
+      <!-- Executive Hero Banner with Image -->
+      <div class="hero-banner glass-panel">
+        <div class="hero-text">
+          <span class="badge badge-normal"><i class="fa-solid fa-shield-halved"></i> AI Intelligent Platform</span>
+          <h1 class="hero-headline">Autonomous Expense Analytics & ML Anomaly Guard</h1>
+          <p class="hero-desc">
+            Powered by multi-dimensional Isolation Forest algorithms. Real-time transaction categorization,
+            spending burn-rate forecasting, and instant fraud anomaly isolation.
+          </p>
+          <div class="hero-actions">
+            <button (click)="openExpenseModal()" class="btn btn-primary">
+              <i class="fa-solid fa-plus"></i> Record Transaction
+            </button>
+            <span class="live-pill"><i class="fa-solid fa-circle text-emerald"></i> Live Model Active</span>
+          </div>
         </div>
-        <div class="header-actions">
-          <button (click)="openExpenseModal()" class="btn btn-primary">
-            <i class="fa-solid fa-plus"></i> Record Transaction
-          </button>
+        <div class="hero-media">
+          <img src="hero-fintech.svg" alt="Fintech Anomaly Intelligence" class="hero-img">
         </div>
-      </header>
+      </div>
 
       <!-- Critical Anomaly Alert Banner -->
       <div class="anomaly-banner glass-panel" *ngIf="summary?.recentAnomalies?.length">
@@ -277,33 +286,72 @@ import { DashboardSummary, Expense, Category } from '../../models/models';
       flex-direction: column;
       gap: 28px;
     }
-    .page-header {
+    .hero-banner {
+      background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+      border: 1px solid #e2e8f0;
+      padding: 28px 32px;
       display: flex;
+      align-items: center;
       justify-content: space-between;
+      gap: 32px;
+      border-radius: 20px;
+      box-shadow: 0 4px 20px rgba(15, 23, 42, 0.05);
+    }
+    .hero-text {
+      flex: 1.2;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .hero-headline {
+      font-size: 1.85rem;
+      font-weight: 800;
+      color: #0f172a;
+      letter-spacing: -0.02em;
+      line-height: 1.25;
+    }
+    .hero-desc {
+      font-size: 0.95rem;
+      color: #475569;
+      line-height: 1.5;
+    }
+    .hero-actions {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-top: 6px;
+    }
+    .live-pill {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: #059669;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .hero-media {
+      flex: 0.9;
+      display: flex;
+      justify-content: center;
       align-items: center;
     }
-    .page-title {
-      font-size: 1.8rem;
-      font-weight: 800;
-      color: #ffffff;
-      letter-spacing: -0.02em;
-    }
-    .page-subtitle {
-      font-size: 0.9rem;
-      color: #94a3b8;
-      margin-top: 4px;
+    .hero-img {
+      max-width: 100%;
+      height: 190px;
+      filter: drop-shadow(0 10px 15px rgba(15, 23, 42, 0.08));
     }
     .anomaly-banner {
-      background: linear-gradient(90deg, rgba(244, 63, 94, 0.15) 0%, rgba(15, 23, 42, 0.8) 100%);
-      border: 1px solid rgba(244, 63, 94, 0.35);
+      background: #fff1f2;
+      border: 1px solid #fecdd3;
       padding: 18px 24px;
       display: flex;
       align-items: center;
       gap: 20px;
+      border-radius: 16px;
     }
     .banner-icon {
       font-size: 2rem;
-      color: #fb7185;
+      color: #e11d48;
     }
     .banner-content {
       flex: 1;
@@ -313,12 +361,12 @@ import { DashboardSummary, Expense, Category } from '../../models/models';
       align-items: center;
       gap: 12px;
       font-weight: 700;
-      color: #ffffff;
+      color: #9f1239;
       font-size: 1rem;
       margin-bottom: 4px;
     }
     .banner-text {
-      color: #cbd5e1;
+      color: #881337;
       font-size: 0.88rem;
     }
     .stats-grid {
@@ -331,6 +379,9 @@ import { DashboardSummary, Expense, Category } from '../../models/models';
       display: flex;
       align-items: flex-start;
       gap: 16px;
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 16px;
     }
     .stat-icon-wrapper {
       width: 48px;
@@ -342,46 +393,46 @@ import { DashboardSummary, Expense, Category } from '../../models/models';
       font-size: 1.3rem;
       flex-shrink: 0;
     }
-    .icon-emerald { background: rgba(16, 185, 129, 0.15); color: #34d399; }
-    .icon-rose { background: rgba(244, 63, 94, 0.15); color: #fb7185; }
-    .icon-purple { background: rgba(139, 92, 246, 0.15); color: #a78bfa; }
-    .icon-amber { background: rgba(245, 158, 11, 0.15); color: #fbbf24; }
+    .icon-emerald { background: #dcfce7; color: #059669; }
+    .icon-rose { background: #fee2e2; color: #e11d48; }
+    .icon-purple { background: #ede9fe; color: #7c3aed; }
+    .icon-amber { background: #fef3c7; color: #d97706; }
     .stat-info {
       flex: 1;
     }
     .stat-label {
       font-size: 0.78rem;
-      font-weight: 600;
-      color: #94a3b8;
+      font-weight: 700;
+      color: #64748b;
       text-transform: uppercase;
       letter-spacing: 0.05em;
     }
     .stat-value {
       font-size: 1.6rem;
       font-weight: 800;
-      color: #ffffff;
+      color: #0f172a;
       margin: 4px 0 8px 0;
     }
-    .text-rose { color: #fb7185; }
-    .text-emerald { color: #34d399; }
+    .text-rose { color: #e11d48; }
+    .text-emerald { color: #059669; }
     .stat-trend {
       font-size: 0.78rem;
       display: flex;
       align-items: center;
       gap: 6px;
-      color: #94a3b8;
+      color: #64748b;
     }
     .progress-bar-container {
       width: 100%;
-      height: 6px;
-      background: rgba(255, 255, 255, 0.1);
+      height: 7px;
+      background: #e2e8f0;
       border-radius: 10px;
       overflow: hidden;
       margin-top: 6px;
     }
     .progress-bar {
       height: 100%;
-      background: linear-gradient(90deg, #6366f1, #ec4899);
+      background: linear-gradient(90deg, #4f46e5, #ec4899);
       border-radius: 10px;
     }
     .dashboard-columns {
@@ -394,6 +445,9 @@ import { DashboardSummary, Expense, Category } from '../../models/models';
       display: flex;
       flex-direction: column;
       gap: 20px;
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 16px;
     }
     .card-header {
       display: flex;
@@ -403,7 +457,7 @@ import { DashboardSummary, Expense, Category } from '../../models/models';
     .card-header h3 {
       font-size: 1.1rem;
       font-weight: 700;
-      color: #ffffff;
+      color: #0f172a;
       display: flex;
       align-items: center;
       gap: 10px;
@@ -419,11 +473,11 @@ import { DashboardSummary, Expense, Category } from '../../models/models';
       font-size: 0.85rem;
       margin-bottom: 6px;
     }
-    .cat-name { color: #f1f5f9; font-weight: 600; }
-    .cat-amount { color: #94a3b8; font-family: var(--font-mono); font-size: 0.8rem; }
+    .cat-name { color: #1e293b; font-weight: 600; }
+    .cat-amount { color: #64748b; font-family: var(--font-mono); font-size: 0.8rem; }
     .cat-meter-track {
       height: 8px;
-      background: rgba(255, 255, 255, 0.06);
+      background: #f1f5f9;
       border-radius: 6px;
       overflow: hidden;
     }
@@ -433,8 +487,8 @@ import { DashboardSummary, Expense, Category } from '../../models/models';
       transition: width 0.4s ease;
     }
     .ml-status-box {
-      background: rgba(99, 102, 241, 0.08);
-      border: 1px solid rgba(99, 102, 241, 0.2);
+      background: #eff6ff;
+      border: 1px solid #bfdbfe;
       border-radius: 12px;
       padding: 14px;
       margin-top: auto;
@@ -445,12 +499,12 @@ import { DashboardSummary, Expense, Category } from '../../models/models';
       gap: 8px;
       font-weight: 700;
       font-size: 0.85rem;
-      color: #ffffff;
+      color: #1e40af;
       margin-bottom: 4px;
     }
     .ml-status-text {
       font-size: 0.78rem;
-      color: #94a3b8;
+      color: #3b82f6;
       line-height: 1.4;
     }
     .transactions-list {
@@ -464,12 +518,12 @@ import { DashboardSummary, Expense, Category } from '../../models/models';
       gap: 14px;
       padding: 12px;
       border-radius: 10px;
-      background: rgba(255, 255, 255, 0.02);
-      border: 1px solid rgba(255, 255, 255, 0.04);
+      background: #f8fafc;
+      border: 1px solid #f1f5f9;
       transition: background 0.2s;
     }
     .transaction-row:hover {
-      background: rgba(255, 255, 255, 0.05);
+      background: #f1f5f9;
     }
     .tx-icon {
       width: 40px;
@@ -492,13 +546,13 @@ import { DashboardSummary, Expense, Category } from '../../models/models';
     .tx-title {
       font-size: 0.9rem;
       font-weight: 600;
-      color: #ffffff;
+      color: #0f172a;
     }
     .tx-amount {
       font-size: 0.92rem;
       font-weight: 700;
       font-family: var(--font-mono);
-      color: #ffffff;
+      color: #0f172a;
     }
     .tx-bottom {
       display: flex;
