@@ -26,8 +26,7 @@ import { AuthService } from './services/auth.service';
       flex: 1;
       height: 100vh;
       overflow-y: auto;
-      background: radial-gradient(circle at 10% 10%, rgba(30, 41, 59, 0.4) 0%, transparent 80%),
-                  radial-gradient(circle at 90% 90%, rgba(99, 102, 241, 0.05) 0%, transparent 60%);
+      background: transparent;
     }
     .no-sidebar .main-content {
       width: 100%;
