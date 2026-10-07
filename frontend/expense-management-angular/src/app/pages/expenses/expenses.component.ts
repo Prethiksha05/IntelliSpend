@@ -15,6 +15,11 @@ import { Expense, Category } from '../../models/models';
           <h1 class="page-title">Transaction Ledger</h1>
           <p class="page-subtitle">Track, filter, and audit full expenditure records with AI verification tags</p>
         </div>
+        <div class="header-actions">
+          <button (click)="openAddModal()" class="btn btn-primary">
+            <i class="fa-solid fa-plus"></i> Record Transaction
+          </button>
+        </div>
       </header>
 
       <!-- Filters Bar -->
@@ -82,6 +87,64 @@ import { Expense, Category } from '../../models/models';
           </tbody>
         </table>
       </div>
+
+      <!-- Add Expense Modal -->
+      <div class="modal-overlay" *ngIf="showAddModal">
+        <div class="modal-content glass-panel">
+          <div class="modal-header">
+            <h3><i class="fa-solid fa-bolt text-indigo"></i> Record New Expense & ML Audit</h3>
+            <button (click)="showAddModal = false" class="modal-close">&times;</button>
+          </div>
+
+          <form (ngSubmit)="saveExpense()" class="modal-body">
+            <div class="form-group">
+              <label class="form-label">Expense Title / Merchant</label>
+              <input type="text" [(ngModel)]="newExpense.title" name="title" class="form-control" placeholder="e.g. Flight to San Francisco, Apple Store" required>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group flex-1">
+                <label class="form-label">Amount ($ USD)</label>
+                <input type="number" step="0.01" [(ngModel)]="newExpense.amount" name="amount" class="form-control" placeholder="0.00" required>
+              </div>
+              <div class="form-group flex-1">
+                <label class="form-label">Date</label>
+                <input type="date" [(ngModel)]="newExpense.expenseDate" name="expenseDate" class="form-control" required>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group flex-1">
+                <label class="form-label">Category</label>
+                <select [(ngModel)]="newExpense.categoryId" name="categoryId" class="form-control" required>
+                  <option *ngFor="let cat of categories" [value]="cat.id">{{ cat.name }}</option>
+                </select>
+              </div>
+              <div class="form-group flex-1">
+                <label class="form-label">Payment Method</label>
+                <select [(ngModel)]="newExpense.paymentMethod" name="paymentMethod" class="form-control">
+                  <option value="CREDIT_CARD">Credit Card</option>
+                  <option value="DEBIT_CARD">Debit Card</option>
+                  <option value="BANK_TRANSFER">Bank Wire</option>
+                  <option value="CASH">Cash</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Description / Context (optional)</label>
+              <input type="text" [(ngModel)]="newExpense.description" name="description" class="form-control" placeholder="Notes on expense purpose">
+            </div>
+
+            <div class="modal-footer">
+              <button type="button" (click)="showAddModal = false" class="btn btn-secondary">Cancel</button>
+              <button type="submit" class="btn btn-primary" [disabled]="loading">
+                <i class="fa-solid fa-microchip"></i> Evaluate & Submit
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
     </div>
   `,
   styles: [`
@@ -90,6 +153,11 @@ import { Expense, Category } from '../../models/models';
       display: flex;
       flex-direction: column;
       gap: 24px;
+    }
+    .page-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
     }
     .page-title {
       font-size: 1.8rem;
@@ -203,21 +271,91 @@ import { Expense, Category } from '../../models/models';
       padding: 40px !important;
       color: #64748b;
     }
+    .modal-header {
+      padding: 20px 24px;
+      border-bottom: 1px solid var(--border-subtle);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .modal-header h3 {
+      font-size: 1.15rem;
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .modal-close {
+      background: transparent;
+      border: none;
+      font-size: 1.5rem;
+      color: #94a3b8;
+      cursor: pointer;
+    }
+    .modal-body {
+      padding: 24px;
+    }
+    .modal-footer {
+      display: flex;
+      justify-content: flex-end;
+      gap: 12px;
+      margin-top: 24px;
+    }
+    .form-row {
+      display: flex;
+      gap: 16px;
+    }
+    .flex-1 { flex: 1; }
   `]
 })
 export class ExpensesComponent implements OnInit {
   expenses: Expense[] = [];
+  categories: Category[] = [];
   searchQuery = '';
   filterOnlyAnomalies = false;
+  showAddModal = false;
+  loading = false;
+
+  newExpense: Expense = {
+    title: '',
+    amount: 0,
+    categoryId: 1,
+    expenseDate: new Date().toISOString().substring(0, 10),
+    paymentMethod: 'CREDIT_CARD',
+    description: ''
+  };
 
   constructor(private api: ApiService) {}
 
   ngOnInit() {
     this.loadExpenses();
+    this.api.getCategories().subscribe(c => this.categories = c);
   }
 
   loadExpenses() {
     this.api.getExpenses().subscribe(e => this.expenses = e);
+  }
+
+  openAddModal() {
+    this.newExpense = {
+      title: '',
+      amount: 0,
+      categoryId: this.categories[0]?.id || 1,
+      expenseDate: new Date().toISOString().substring(0, 10),
+      paymentMethod: 'CREDIT_CARD',
+      description: ''
+    };
+    this.showAddModal = true;
+  }
+
+  saveExpense() {
+    if (!this.newExpense.title || this.newExpense.amount <= 0) return;
+    this.loading = true;
+    this.api.createExpense(this.newExpense).subscribe(() => {
+      this.loading = false;
+      this.showAddModal = false;
+      this.loadExpenses();
+    });
   }
 
   get filteredExpenses(): Expense[] {

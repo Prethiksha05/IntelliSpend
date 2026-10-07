@@ -32,10 +32,10 @@ public class Budget {
     @Column(name = "monthly_limit", nullable = false, precision = 12, scale = 2)
     private BigDecimal monthlyLimit;
 
-    @Column(nullable = false)
+    @Column(name = "budget_month", nullable = false)
     private Integer month;
 
-    @Column(nullable = false)
+    @Column(name = "budget_year", nullable = false)
     private Integer year;
 
     @Column(name = "alert_threshold_percentage")
