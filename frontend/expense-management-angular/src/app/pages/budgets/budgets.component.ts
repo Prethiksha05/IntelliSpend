@@ -67,11 +67,11 @@ import { Budget } from '../../models/models';
     .page-title {
       font-size: 1.8rem;
       font-weight: 800;
-      color: #ffffff;
+      color: #0f172a !important;
     }
     .page-subtitle {
       font-size: 0.9rem;
-      color: #94a3b8;
+      color: #475569;
       margin-top: 4px;
     }
     .budgets-grid {
@@ -84,9 +84,13 @@ import { Budget } from '../../models/models';
       display: flex;
       flex-direction: column;
       gap: 20px;
+      background: #ffffff !important;
+      border: 1px solid #e2e8f0;
+      border-radius: 16px;
+      box-shadow: 0 4px 15px rgba(15, 23, 42, 0.05);
     }
     .border-overbudget {
-      border: 1px solid rgba(244, 63, 94, 0.4);
+      border: 2px solid #f43f5e !important;
     }
     .b-header {
       display: flex;
@@ -96,7 +100,7 @@ import { Budget } from '../../models/models';
     .b-category {
       font-size: 1.15rem;
       font-weight: 700;
-      color: #ffffff;
+      color: #0f172a !important;
     }
     .b-month {
       font-size: 0.8rem;
@@ -109,14 +113,14 @@ import { Budget } from '../../models/models';
     .b-lbl {
       display: block;
       font-size: 0.75rem;
-      color: #94a3b8;
+      color: #64748b;
       text-transform: uppercase;
-      font-weight: 600;
+      font-weight: 700;
     }
     .b-val {
-      font-size: 1.3rem;
+      font-size: 1.35rem;
       font-weight: 800;
-      color: #ffffff;
+      color: #0f172a !important;
     }
     .text-right {
       text-align: right;
@@ -124,11 +128,11 @@ import { Budget } from '../../models/models';
     .b-meter-wrap {
       display: flex;
       flex-direction: column;
-      gap: 6px;
+      gap: 8px;
     }
     .b-meter-track {
       height: 10px;
-      background: rgba(255, 255, 255, 0.08);
+      background: #e2e8f0;
       border-radius: 10px;
       overflow: hidden;
     }
@@ -137,14 +141,15 @@ import { Budget } from '../../models/models';
       border-radius: 10px;
       transition: width 0.3s ease;
     }
-    .bg-rose { background: #f43f5e; }
-    .bg-amber { background: #f59e0b; }
-    .bg-indigo { background: #6366f1; }
+    .bg-rose { background: #e11d48; }
+    .bg-amber { background: #d97706; }
+    .bg-indigo { background: #4f46e5; }
     .b-meter-labels {
       display: flex;
       justify-content: space-between;
       font-size: 0.78rem;
-      color: #94a3b8;
+      color: #64748b;
+      font-weight: 600;
     }
     .mono-text {
       font-family: var(--font-mono);

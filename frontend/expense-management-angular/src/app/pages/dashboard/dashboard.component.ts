@@ -29,6 +29,22 @@ import { DashboardSummary, Expense, Category } from '../../models/models';
           </div>
         </div>
         <div class="hero-media">
+          <div class="card-3d-wrapper">
+            <div class="card-3d">
+              <div class="card-3d-top">
+                <span class="card-chip"></span>
+                <i class="fa-solid fa-wifi text-white"></i>
+              </div>
+              <div class="card-3d-middle">
+                <span class="card-balance-lbl">AI SMART WALLET</span>
+                <h3 class="card-balance-val">$4,500.00</h3>
+              </div>
+              <div class="card-3d-bottom">
+                <span class="card-holder">ALEX MORGAN</span>
+                <span class="card-status"><i class="fa-solid fa-shield-check"></i> ML PROTECTED</span>
+              </div>
+            </div>
+          </div>
           <img src="hero-fintech.svg" alt="Fintech Anomaly Intelligence" class="hero-img">
         </div>
       </div>
@@ -330,15 +346,80 @@ import { DashboardSummary, Expense, Category } from '../../models/models';
       gap: 6px;
     }
     .hero-media {
-      flex: 0.9;
+      flex: 1.1;
       display: flex;
       justify-content: center;
       align-items: center;
+      gap: 16px;
+    }
+    .card-3d-wrapper {
+      perspective: 900px;
+    }
+    .card-3d {
+      width: 250px;
+      height: 155px;
+      border-radius: 16px;
+      background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 50%, #db2777 100%);
+      transform: rotateY(-14deg) rotateX(10deg);
+      box-shadow: 12px 16px 30px rgba(79, 70, 229, 0.28), -2px -2px 10px rgba(255, 255, 255, 0.6);
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      color: #ffffff;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+    .card-3d:hover {
+      transform: rotateY(0deg) rotateX(0deg) scale(1.06);
+      box-shadow: 0 20px 35px rgba(79, 70, 229, 0.35);
+    }
+    .card-3d-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .card-chip {
+      width: 32px;
+      height: 24px;
+      background: linear-gradient(135deg, #fef08a, #ca8a04);
+      border-radius: 5px;
+      display: inline-block;
+      box-shadow: inset 0 1px 2px rgba(0,0,0,0.3);
+    }
+    .card-3d-middle {
+      margin: 8px 0;
+    }
+    .card-balance-lbl {
+      font-size: 0.62rem;
+      letter-spacing: 0.08em;
+      opacity: 0.85;
+      font-weight: 700;
+    }
+    .card-balance-val {
+      font-size: 1.35rem;
+      font-weight: 800;
+      color: #ffffff !important;
+      letter-spacing: -0.02em;
+    }
+    .card-3d-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.68rem;
+      font-weight: 700;
+    }
+    .card-status {
+      font-size: 0.62rem;
+      background: rgba(255, 255, 255, 0.2);
+      padding: 2px 8px;
+      border-radius: 99px;
+      backdrop-filter: blur(4px);
     }
     .hero-img {
-      max-width: 100%;
-      height: 190px;
-      filter: drop-shadow(0 10px 15px rgba(15, 23, 42, 0.08));
+      max-width: 200px;
+      height: 160px;
+      filter: drop-shadow(0 8px 12px rgba(15, 23, 42, 0.08));
     }
     .anomaly-banner {
       background: #fff1f2;

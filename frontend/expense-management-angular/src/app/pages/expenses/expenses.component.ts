@@ -162,11 +162,11 @@ import { Expense, Category } from '../../models/models';
     .page-title {
       font-size: 1.8rem;
       font-weight: 800;
-      color: #ffffff;
+      color: #0f172a !important;
     }
     .page-subtitle {
       font-size: 0.9rem;
-      color: #94a3b8;
+      color: #475569;
       margin-top: 4px;
     }
     .filters-bar {
@@ -175,13 +175,16 @@ import { Expense, Category } from '../../models/models';
       justify-content: space-between;
       align-items: center;
       gap: 16px;
+      background: #ffffff !important;
+      border: 1px solid #e2e8f0;
+      border-radius: 14px;
     }
     .search-box {
       display: flex;
       align-items: center;
       gap: 12px;
-      background: rgba(15, 23, 42, 0.8);
-      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: #f8fafc;
+      border: 1px solid #cbd5e1;
       border-radius: 10px;
       padding: 8px 14px;
       width: 360px;
@@ -192,7 +195,7 @@ import { Expense, Category } from '../../models/models';
     .search-input {
       background: transparent;
       border: none;
-      color: #ffffff;
+      color: #0f172a;
       outline: none;
       width: 100%;
       font-size: 0.9rem;
@@ -200,6 +203,10 @@ import { Expense, Category } from '../../models/models';
     .table-container {
       overflow-x: auto;
       padding: 8px;
+      background: #ffffff !important;
+      border: 1px solid #e2e8f0;
+      border-radius: 16px;
+      box-shadow: 0 4px 15px rgba(15, 23, 42, 0.05);
     }
     .data-table {
       width: 100%;
@@ -210,19 +217,19 @@ import { Expense, Category } from '../../models/models';
       padding: 14px 16px;
       font-size: 0.78rem;
       font-weight: 700;
-      color: #94a3b8;
+      color: #475569;
       text-transform: uppercase;
       letter-spacing: 0.05em;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      border-bottom: 2px solid #e2e8f0;
     }
     .data-table td {
       padding: 16px;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+      border-bottom: 1px solid #f1f5f9;
       font-size: 0.9rem;
-      color: #f1f5f9;
+      color: #0f172a;
     }
     .data-table tr:hover {
-      background: rgba(255, 255, 255, 0.02);
+      background: #f8fafc;
     }
     .mono-text {
       font-family: var(--font-mono);
@@ -246,14 +253,15 @@ import { Expense, Category } from '../../models/models';
       font-weight: 600;
       padding: 4px 10px;
       border-radius: 8px;
-      background: rgba(255, 255, 255, 0.04);
+      background: #f1f5f9;
+      color: #1e293b;
       border-left: 3px solid;
     }
     .font-bold {
       font-weight: 700;
     }
     .text-rose {
-      color: #fb7185;
+      color: #e11d48;
     }
     .btn-icon {
       background: transparent;
@@ -264,7 +272,7 @@ import { Expense, Category } from '../../models/models';
       transition: color 0.2s;
     }
     .hover-danger:hover {
-      color: #f43f5e;
+      color: #e11d48;
     }
     .empty-state {
       text-align: center;

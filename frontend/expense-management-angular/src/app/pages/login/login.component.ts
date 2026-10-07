@@ -55,7 +55,7 @@ import { AuthService } from '../../services/auth.service';
       display: flex;
       align-items: center;
       justify-content: center;
-      background: radial-gradient(circle at 50% 20%, rgba(99, 102, 241, 0.15) 0%, #090d16 70%);
+      background: radial-gradient(circle at 50% 10%, rgba(99, 102, 241, 0.1) 0%, #f8fafc 80%);
       padding: 24px;
     }
     .login-card {
@@ -65,6 +65,10 @@ import { AuthService } from '../../services/auth.service';
       display: flex;
       flex-direction: column;
       gap: 24px;
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 20px;
+      box-shadow: 0 10px 35px rgba(15, 23, 42, 0.08);
     }
     .brand-header {
       text-align: center;
@@ -77,26 +81,27 @@ import { AuthService } from '../../services/auth.service';
       width: 52px;
       height: 52px;
       border-radius: 14px;
-      background: linear-gradient(135deg, rgba(99, 102, 241, 0.25) 0%, rgba(168, 85, 247, 0.25) 100%);
-      border: 1px solid rgba(99, 102, 241, 0.4);
+      background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
       display: flex;
       align-items: center;
       justify-content: center;
       font-size: 1.6rem;
-      color: #818cf8;
+      color: #ffffff;
       margin-bottom: 6px;
+      box-shadow: 0 6px 15px rgba(79, 70, 229, 0.25);
     }
     .brand-header h2 {
       font-size: 1.6rem;
-      color: #ffffff;
+      color: #0f172a;
+      font-weight: 800;
     }
     .tagline {
-      font-size: 0.82rem;
-      color: #94a3b8;
+      font-size: 0.85rem;
+      color: #64748b;
     }
     .demo-banner {
-      background: rgba(245, 158, 11, 0.1);
-      border: 1px solid rgba(245, 158, 11, 0.3);
+      background: #fffbeb;
+      border: 1px solid #fde68a;
       border-radius: 12px;
       padding: 14px;
       display: flex;
@@ -112,14 +117,14 @@ import { AuthService } from '../../services/auth.service';
     .demo-title {
       font-size: 0.85rem;
       font-weight: 700;
-      color: #fbbf24;
+      color: #b45309;
       display: flex;
       align-items: center;
       gap: 6px;
     }
     .demo-desc {
-      font-size: 0.72rem;
-      color: #cbd5e1;
+      font-size: 0.74rem;
+      color: #78350f;
     }
     .w-full {
       width: 100%;

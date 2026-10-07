@@ -97,11 +97,11 @@ import { Expense } from '../../models/models';
     .page-title {
       font-size: 1.8rem;
       font-weight: 800;
-      color: #ffffff;
+      color: #0f172a !important;
     }
     .page-subtitle {
       font-size: 0.9rem;
-      color: #94a3b8;
+      color: #475569;
       margin-top: 4px;
     }
     .ml-badge-container {
@@ -113,21 +113,23 @@ import { Expense } from '../../models/models';
       display: flex;
       gap: 20px;
       align-items: center;
-      background: linear-gradient(90deg, rgba(99, 102, 241, 0.1) 0%, rgba(15, 23, 42, 0.6) 100%);
-      border: 1px solid rgba(99, 102, 241, 0.3);
+      background: linear-gradient(135deg, #eff6ff 0%, #f0fdf4 100%) !important;
+      border: 1px solid #bfdbfe !important;
+      border-radius: 16px;
     }
     .arch-icon {
       font-size: 2.2rem;
-      color: #818cf8;
+      color: #4f46e5;
     }
     .arch-content h4 {
-      color: #ffffff;
+      color: #1e3a8a !important;
       margin-bottom: 4px;
-      font-size: 1rem;
+      font-size: 1.05rem;
+      font-weight: 800;
     }
     .arch-content p {
-      font-size: 0.85rem;
-      color: #94a3b8;
+      font-size: 0.88rem;
+      color: #334155;
       line-height: 1.5;
     }
     .anomalies-grid {
@@ -140,7 +142,11 @@ import { Expense } from '../../models/models';
       display: flex;
       flex-direction: column;
       gap: 16px;
-      border-left: 4px solid #f43f5e;
+      background: #ffffff !important;
+      border: 1px solid #e2e8f0;
+      border-left: 5px solid #e11d48 !important;
+      border-radius: 16px;
+      box-shadow: 0 4px 15px rgba(15, 23, 42, 0.05);
     }
     .card-top {
       display: flex;
@@ -148,11 +154,11 @@ import { Expense } from '../../models/models';
       gap: 20px;
     }
     .risk-meter {
-      width: 70px;
-      height: 70px;
+      width: 72px;
+      height: 72px;
       border-radius: 14px;
-      background: rgba(244, 63, 94, 0.15);
-      border: 1px solid rgba(244, 63, 94, 0.3);
+      background: #ffe4e6;
+      border: 1px solid #fecdd3;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -161,13 +167,13 @@ import { Expense } from '../../models/models';
     .score-tag {
       font-size: 1.15rem;
       font-weight: 800;
-      color: #fb7185;
+      color: #e11d48;
       font-family: var(--font-mono);
     }
     .score-lbl {
-      font-size: 0.55rem;
-      font-weight: 700;
-      color: #94a3b8;
+      font-size: 0.58rem;
+      font-weight: 800;
+      color: #9f1239;
       letter-spacing: 0.05em;
     }
     .card-titles {
@@ -177,9 +183,9 @@ import { Expense } from '../../models/models';
       gap: 4px;
     }
     .anomaly-title {
-      font-size: 1.2rem;
-      font-weight: 700;
-      color: #ffffff;
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: #0f172a !important;
     }
     .anomaly-time {
       font-size: 0.8rem;
@@ -196,38 +202,40 @@ import { Expense } from '../../models/models';
     }
     .cost-cat {
       font-size: 0.8rem;
-      color: #94a3b8;
+      color: #64748b;
+      font-weight: 600;
     }
     .forensic-box {
-      background: rgba(15, 23, 42, 0.7);
-      border: 1px solid rgba(255, 255, 255, 0.06);
-      border-radius: 10px;
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 12px;
       padding: 14px 18px;
     }
     .forensic-header {
       display: flex;
       align-items: center;
       gap: 8px;
-      font-size: 0.8rem;
+      font-size: 0.82rem;
       font-weight: 700;
-      color: #38bdf8;
+      color: #0284c7;
       margin-bottom: 6px;
     }
     .forensic-text {
-      color: #e2e8f0;
-      font-size: 0.88rem;
-      line-height: 1.45;
+      color: #1e293b;
+      font-size: 0.9rem;
+      line-height: 1.5;
     }
     .card-actions {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding-top: 10px;
-      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      padding-top: 12px;
+      border-top: 1px solid #f1f5f9;
     }
     .action-caption {
       font-size: 0.82rem;
       color: #64748b;
+      font-weight: 600;
     }
     .action-buttons {
       display: flex;
@@ -237,10 +245,10 @@ import { Expense } from '../../models/models';
       font-family: var(--font-mono);
     }
     .text-rose {
-      color: #fb7185;
+      color: #e11d48;
     }
     .text-cyan {
-      color: #38bdf8;
+      color: #0284c7;
     }
     .empty-anomalies {
       text-align: center;
@@ -249,15 +257,18 @@ import { Expense } from '../../models/models';
       flex-direction: column;
       align-items: center;
       gap: 12px;
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 16px;
     }
     .empty-anomalies i {
       font-size: 3rem;
     }
     .empty-anomalies h3 {
-      color: #ffffff;
+      color: #0f172a;
     }
     .empty-anomalies p {
-      color: #94a3b8;
+      color: #64748b;
       font-size: 0.9rem;
     }
   `]
